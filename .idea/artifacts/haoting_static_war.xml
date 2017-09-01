@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="haoting-static:war">
+    <output-path>$PROJECT_DIR$/haoting-static/target</output-path>
+    <root id="archive" name="/haoting-static.war">
+      <element id="artifact" artifact-name="haoting-static:war exploded" />
+    </root>
+  </artifact>
+</component>

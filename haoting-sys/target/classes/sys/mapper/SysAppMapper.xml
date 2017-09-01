@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haoting.sys.mapper.SysAppMapper">
+
+	<resultMap id="BaseResultMap" type="com.haoting.sys.model.SysApp">
+		<result column="id" property="id" jdbcType="BIGINT"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="code" property="code" jdbcType="VARCHAR"/>
+		<result column="is_enable" property="isEnable" jdbcType="BIT"/>
+		<result column="sort" property="sort" jdbcType="INTEGER"/>
+		<result column="gmt_created_time" property="gmtCreatedTime" jdbcType="TIMESTAMP"/>
+		<result column="gmt_modified_time" property="gmtModifiedTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,
+		name,
+		code,
+		is_enable,
+		sort,
+		gmt_created_time,
+		gmt_modified_time
+	</sql>
+
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select
+		<include refid="Base_Column_List" />
+		from sys_app
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+		delete from sys_app
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insert" parameterType="com.haoting.sys.model.SysApp" >
+		insert into sys_app (<include refid="Base_Column_List" />)
+		values (
+		#{id,jdbcType=BIGINT},
+		#{name,jdbcType=VARCHAR},
+		#{code,jdbcType=VARCHAR},
+		#{isEnable,jdbcType=BIT},
+		#{sort,jdbcType=INTEGER},
+		#{gmtCreatedTime,jdbcType=TIMESTAMP},
+		#{gmtModifiedTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.haoting.sys.model.SysApp" >
+		insert into sys_app
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="name != null" >
+				name,
+			</if>
+			<if test="code != null" >
+				code,
+			</if>
+			<if test="isEnable != null" >
+				is_enable,
+			</if>
+			<if test="sort != null" >
+				sort,
+			</if>
+			<if test="gmtCreatedTime != null" >
+				gmt_created_time,
+			</if>
+			<if test="gmtModifiedTime != null" >
+				gmt_modified_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="name != null" >
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null" >
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnable != null" >
+				#{isEnable,jdbcType=BIT},
+			</if>
+			<if test="sort != null" >
+				#{sort,jdbcType=INTEGER},
+			</if>
+			<if test="gmtCreatedTime != null" >
+				#{gmtCreatedTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gmtModifiedTime != null" >
+				#{gmtModifiedTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.haoting.sys.model.SysApp" >
+		update sys_app
+		<set >
+			<if test="name != null" >
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="code != null" >
+				code = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnable != null" >
+				is_enable = #{isEnable,jdbcType=BIT},
+			</if>
+			<if test="sort != null" >
+				sort = #{sort,jdbcType=INTEGER},
+			</if>
+			<if test="gmtCreatedTime != null" >
+				gmt_created_time = #{gmtCreatedTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gmtModifiedTime != null" >
+				gmt_modified_time = #{gmtModifiedTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.haoting.sys.model.SysApp" >
+		update sys_app
+		set name = #{name,jdbcType=VARCHAR},
+		code = #{code,jdbcType=VARCHAR},
+		is_enable = #{isEnable,jdbcType=BIT},
+		sort = #{sort,jdbcType=INTEGER},
+		gmt_created_time = #{gmtCreatedTime,jdbcType=TIMESTAMP},
+		gmt_modified_time = #{gmtModifiedTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="selectPage" parameterType="com.haoting.sys.dto.SysAppSearchDTO"
+			resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM sys_app
+		<where>
+			<if test="name != null and name != '' " >
+				name = #{name,jdbcType=VARCHAR}
+			</if>
+		</where>
+		ORDER BY sort DESC, gmt_created_time DESC
+	</select>
+
+	<select id="findByCode" parameterType="java.lang.String" resultType="App" >
+		SELECT <include refid="Base_Column_List" />
+		FROM sys_app
+		WHERE code = #{code}
+	</select>
+
+	<delete id="deleteBatch" >
+		DELETE FROM sys_app
+		WHERE id IN
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<update id="updateEnable" parameterType="map" >
+		UPDATE sys_app
+		SET is_enable = #{isEnable}
+		WHERE id IN
+		<foreach collection="ids" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+
+
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List" />
+		FROM sys_app
+		WHERE is_enable = true
+	</select>
+
+	<select id="findByUserId" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List"/>
+		FROM sys_app a
+		where a.is_enable= #{isEnable}
+		<if test="userId != null and userId != '' ">
+			AND EXISTS (SELECT 1
+			FROM sys_user_app ua
+			WHERE ua.app_id = a.id
+			AND ua.user_id = #{userId})
+		</if>
+		ORDER BY a.sort DESC, a.gmt_created_time DESC
+	</select>
+</mapper>

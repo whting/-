@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haoting.sys.mapper.SysPermissionMapper">
+
+    <resultMap id="BaseResultMap" type="com.haoting.sys.model.SysPermission">
+            <result column="id" property="id" jdbcType="BIGINT"/>
+            <result column="app_id" property="appId" jdbcType="BIGINT"/>
+            <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+            <result column="icon" property="icon" jdbcType="VARCHAR"/>
+            <result column="name" property="name" jdbcType="VARCHAR"/>
+            <result column="url" property="url" jdbcType="VARCHAR"/>
+            <result column="sort" property="sort" jdbcType="INTEGER"/>
+            <result column="is_enable" property="isEnable" jdbcType="BIT"/>
+            <result column="is_menu" property="isMenu" jdbcType="BIT"/>
+            <result column="gmt_created_time" property="gmtCreatedTime" jdbcType="TIMESTAMP"/>
+            <result column="gmt_modified_time" property="gmtModifiedTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        app_id,
+        parent_id,
+        icon,
+        name,
+        url,
+        sort,
+        is_enable,
+        is_menu,
+        gmt_created_time,
+        gmt_modified_time
+    </sql>
+
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
+        select
+        <include refid="Base_Column_List" />
+        from sys_permission
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="Long" >
+        delete from sys_permission
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="com.haoting.sys.model.SysPermission" >
+        insert into sys_permission (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=BIGINT},
+        #{appId,jdbcType=BIGINT},
+        #{parentId,jdbcType=BIGINT},
+        #{icon,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR},
+        #{url,jdbcType=VARCHAR},
+        #{sort,jdbcType=INTEGER},
+        #{isEnable,jdbcType=BIT},
+        #{isMenu,jdbcType=BIT},
+        #{gmtCreatedTime,jdbcType=TIMESTAMP},
+        #{gmtModifiedTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.haoting.sys.model.SysPermission" >
+        insert into sys_permission
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="appId != null" >
+                app_id,
+            </if>
+            <if test="parentId != null" >
+                parent_id,
+            </if>
+            <if test="icon != null" >
+                icon,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="url != null" >
+                url,
+            </if>
+            <if test="sort != null" >
+                sort,
+            </if>
+            <if test="isEnable != null" >
+                is_enable,
+            </if>
+            <if test="isMenu != null" >
+                is_menu,
+            </if>
+            <if test="gmtCreatedTime != null" >
+                gmt_created_time,
+            </if>
+            <if test="gmtModifiedTime != null" >
+                gmt_modified_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+            #{id,jdbcType=BIGINT},
+            </if>
+            <if test="appId != null" >
+            #{appId,jdbcType=BIGINT},
+            </if>
+            <if test="parentId != null" >
+            #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="icon != null" >
+            #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+            #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null" >
+            #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null" >
+            #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="isEnable != null" >
+            #{isEnable,jdbcType=BIT},
+            </if>
+            <if test="isMenu != null" >
+            #{isMenu,jdbcType=BIT},
+            </if>
+            <if test="gmtCreatedTime != null" >
+            #{gmtCreatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModifiedTime != null" >
+            #{gmtModifiedTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.haoting.sys.model.SysPermission" >
+        update sys_permission
+        <set >
+            <if test="appId != null" >
+              app_id = #{appId,jdbcType=BIGINT},
+            </if>
+            <if test="parentId != null" >
+              parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="icon != null" >
+              icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+              name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null" >
+              url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null" >
+              sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="isEnable != null" >
+              is_enable = #{isEnable,jdbcType=BIT},
+            </if>
+            <if test="isMenu != null" >
+              is_menu = #{isMenu,jdbcType=BIT},
+            </if>
+            <if test="gmtCreatedTime != null" >
+              gmt_created_time = #{gmtCreatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModifiedTime != null" >
+              gmt_modified_time = #{gmtModifiedTime,jdbcType=TIMESTAMP},
+            </if>
+
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.haoting.sys.model.SysPermission" >
+        update sys_permission set
+          app_id = #{appId,jdbcType=BIGINT},
+          parent_id = #{parentId,jdbcType=BIGINT},
+          icon = #{icon,jdbcType=VARCHAR},
+          name = #{name,jdbcType=VARCHAR},
+          url = #{url,jdbcType=VARCHAR},
+          sort = #{sort,jdbcType=INTEGER},
+          is_enable = #{isEnable,jdbcType=BIT},
+          is_menu = #{isMenu,jdbcType=BIT},
+          gmt_created_time = #{gmtCreatedTime,jdbcType=TIMESTAMP},
+          gmt_modified_time = #{gmtModifiedTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+
+    <select id="selectPage" parameterType="com.haoting.sys.dto.SysPermissionSearchDTO"
+            resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_permission
+        <where>
+          <if test="appId != null" >
+            app_id = #{appId,jdbcType=BIGINT},
+          </if>
+          <if test="parentId != null" >
+            parent_id = #{parentId,jdbcType=BIGINT},
+          </if>
+          <if test="icon != null" >
+            icon = #{icon,jdbcType=VARCHAR},
+          </if>
+          <if test="name != null" >
+            name = #{name,jdbcType=VARCHAR},
+          </if>
+          <if test="url != null" >
+            url = #{url,jdbcType=VARCHAR},
+          </if>
+          <if test="sort != null" >
+            sort = #{sort,jdbcType=INTEGER},
+          </if>
+          <if test="isEnable != null" >
+            is_enable = #{isEnable,jdbcType=BIT},
+          </if>
+          <if test="isMenu != null" >
+            is_menu = #{isMenu,jdbcType=BIT},
+          </if>
+          <if test="gmtCreatedTime != null" >
+            gmt_created_time = #{gmtCreatedTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="gmtModifiedTime != null" >
+            gmt_modified_time = #{gmtModifiedTime,jdbcType=TIMESTAMP}
+          </if>
+        </where>
+        ORDER BY GMT_CREATED_TIME DESC
+    </select>
+
+    <select id="search" parameterType="com.haoting.sys.dto.SysPermissionSearchDTO" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_permission
+        <where>
+            <if test="appId != null" >
+                and app_id = #{appId,jdbcType=BIGINT}
+            </if>
+            <if test="name != null and name !=''" >
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="isEnable != null" >
+                and is_enable = #{isEnable,jdbcType=BIT}
+            </if>
+        </where>
+        ORDER BY sort ASC
+    </select>
+
+    <select id="findListById" parameterType="map" resultType="com.haoting.rpc.RpcPermission">
+        SELECT DISTINCT
+        p.id id,
+        p.parent_id parentId,
+        p.name name,
+        p.url url,
+        p.icon icon,
+        p.is_menu isMenu,
+        p.sort sort
+        FROM   sys_permission p
+        <if test="userId != null">
+            INNER JOIN sys_role_permission rp ON p.id = rp.permission_id AND p.is_enable = true
+            INNER JOIN sys_role r ON r.id = rp.role_id AND r.is_enable = true
+            INNER JOIN sys_user_role ur ON ur.role_id = r.id
+        </if>
+        WHERE  1 = 1
+        AND p.is_enable = 1
+        <if test="appId != null">
+            AND EXISTS (SELECT 1
+            FROM   sys_app a
+            WHERE  a.id = p.app_id
+            AND a.is_enable = 1
+            AND a.id = #{appId})
+        </if>
+        <if test="userId != null">
+            AND ur.user_id = #{userId}
+        </if>
+        ORDER  BY p.parent_id ASC, p.sort ASC
+    </select>
+
+
+    <delete id="deleteByAppIds" >
+        DELETE FROM sys_permission
+        WHERE app_id IN
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

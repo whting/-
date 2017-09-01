@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haoting.sys.mapper.SysRoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.haoting.sys.model.SysRole">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="app_id" property="appId" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="is_enable" property="isEnable" jdbcType="BIT"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="gmt_created_time" property="gmtCreatedTime" jdbcType="TIMESTAMP"/>
+        <result column="gmt_modified_time" property="gmtModifiedTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        app_id,
+        name,
+        is_enable,
+        description,
+        sort,
+        gmt_created_time,
+        gmt_modified_time
+    </sql>
+
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="Long">
+        delete from sys_role
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="com.haoting.sys.model.SysRole">
+        insert into sys_role (<include refid="Base_Column_List"/>)
+        values (
+        #{id,jdbcType=BIGINT},
+        #{appId,jdbcType=BIGINT},
+        #{name,jdbcType=VARCHAR},
+        #{isEnable,jdbcType=BIT},
+        #{description,jdbcType=VARCHAR},
+        #{sort,jdbcType=INTEGER},
+        #{gmtCreatedTime,jdbcType=TIMESTAMP},
+        #{gmtModifiedTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.haoting.sys.model.SysRole">
+        insert into sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="appId != null">
+                app_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="isEnable != null">
+                is_enable,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="gmtCreatedTime != null">
+                gmt_created_time,
+            </if>
+            <if test="gmtModifiedTime != null">
+                gmt_modified_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="appId != null">
+                #{appId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="isEnable != null">
+                #{isEnable,jdbcType=BIT},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="gmtCreatedTime != null">
+                #{gmtCreatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModifiedTime != null">
+                #{gmtModifiedTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.haoting.sys.model.SysRole">
+        update sys_role
+        <set>
+            <if test="appId != null">
+                app_id = #{appId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable,jdbcType=BIT},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="gmtCreatedTime != null">
+                gmt_created_time = #{gmtCreatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModifiedTime != null">
+                gmt_modified_time = #{gmtModifiedTime,jdbcType=TIMESTAMP},
+            </if>
+
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.haoting.sys.model.SysRole">
+        update sys_role set
+          app_id = #{appId,jdbcType=BIGINT},
+          name = #{name,jdbcType=VARCHAR},
+          is_enable = #{isEnable,jdbcType=BIT},
+          description = #{description,jdbcType=VARCHAR},
+          sort = #{sort,jdbcType=INTEGER},
+          gmt_created_time = #{gmtCreatedTime,jdbcType=TIMESTAMP},
+          gmt_modified_time = #{gmtModifiedTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+
+    <select id="selectPage" parameterType="com.haoting.sys.dto.SysRoleSearchDTO"
+            resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_role
+        <where>
+
+            <if test="name != null and name != ''">
+                name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="appId != null and appId != ''">
+                app_id = #{appId,jdbcType=BIGINT}
+            </if>
+
+        </where>
+        ORDER BY GMT_CREATED_TIME DESC
+    </select>
+
+    <delete id="deleteBatch">
+        DELETE FROM sys_role
+        WHERE id IN
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <update id="updateEnable" parameterType="map">
+        UPDATE sys_role
+        SET
+        is_enable = #{isEnable}
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <select id="findByAppId" parameterType="map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_role
+        WHERE app_id = #{appId} AND is_enable = #{isEnable}
+    </select>
+
+    <delete id="deleteByAppIds">
+        DELETE FROM sys_role
+        WHERE app_id IN
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

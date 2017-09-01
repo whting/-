@@ -1,0 +1,14 @@
+com/haoting/client/SsoResultCode.class
+com/haoting/rpc/RpcPermission.class
+com/haoting/client/PermissionFilter.class
+com/haoting/client/SsoFilter.class
+com/haoting/client/ClientFilter.class
+com/haoting/client/ApplicationPermissionUtils.class
+com/haoting/client/SessionUser.class
+com/haoting/client/PermissionJmsMonitor.class
+com/haoting/client/PermissionJmsListener.class
+com/haoting/client/SessionUtils.class
+com/haoting/client/LogoutFilter.class
+com/haoting/client/SessionPermission.class
+com/haoting/rpc/RpcUser.class
+com/haoting/rpc/AuthenticationRpcService.class

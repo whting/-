@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haoting.sys.mapper.SysUserRoleMapper">
+
+	<resultMap id="BaseResultMap" type="com.haoting.sys.model.SysUserRole">
+		<result column="id" property="id" jdbcType="BIGINT"/>
+		<result column="user_id" property="userId" jdbcType="BIGINT"/>
+		<result column="role_id" property="roleId" jdbcType="BIGINT"/>
+		<result column="app_id" property="appId" jdbcType="BIGINT"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,
+		user_id,
+		role_id,
+		app_id
+	</sql>
+
+	<select id="findUserRoleByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT <include refid="Base_Column_List" />
+		FROM sys_user_role
+		WHERE user_id = #{userId}
+	</select>
+
+	<delete id="deleteByUserId" parameterType="java.lang.Long">
+		DELETE FROM sys_user_role
+		where user_id = #{userId}
+	</delete>
+
+	<insert id="insert" parameterType="SysUserApp">
+		INSERT INTO sys_user_role(user_id,role_id,app_id) VALUES (#{userId},#{roleId},#{appId})
+	</insert>
+
+	<delete id="deleteByRoleIds">
+		DELETE FROM sys_user_role
+		WHERE role_id IN
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	<delete id="deleteByUserIds">
+		DELETE FROM sys_user_role
+		WHERE user_id IN
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<delete id="deleteByAppIds">
+		DELETE FROM sys_user_role
+		WHERE app_id IN
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+
+
+</mapper>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="haoting-web:war">
+    <output-path>$PROJECT_DIR$/haoting-web/target</output-path>
+    <root id="archive" name="/haoting-web.war">
+      <element id="artifact" artifact-name="haoting-web:war exploded" />
+    </root>
+  </artifact>
+</component>

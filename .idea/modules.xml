@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/haoting.iml" filepath="$PROJECT_DIR$/haoting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/haoting-mvc/haoting-mvc.iml" filepath="$PROJECT_DIR$/haoting-mvc/haoting-mvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/haoting-sso-client/haoting-sso-client.iml" filepath="$PROJECT_DIR$/haoting-sso-client/haoting-sso-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/haoting-static/haoting-static.iml" filepath="$PROJECT_DIR$/haoting-static/haoting-static.iml" />
+      <module fileurl="file://$PROJECT_DIR$/haoting-sys/haoting-sys.iml" filepath="$PROJECT_DIR$/haoting-sys/haoting-sys.iml" />
+      <module fileurl="file://$PROJECT_DIR$/haoting-web/haoting-web.iml" filepath="$PROJECT_DIR$/haoting-web/haoting-web.iml" />
+    </modules>
+  </component>
+</project>
