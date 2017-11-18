@@ -1,8 +1,6 @@
 package com.haoting.sys.controller.sys;
 
 import com.google.common.collect.Lists;
-import com.haoting.client.SessionHolder;
-import com.haoting.mvc.config.ConfigUtils;
 import com.haoting.mvc.model.Result;
 import com.haoting.mvc.pagination.Pagination;
 import com.haoting.mvc.validator.annotation.ValidateParam;
@@ -104,7 +102,7 @@ public class SysRoleController {
     public Result<String> delete(@ValidateParam(value = { NOT_BLANK }, name = "ids") Long[] ids,Long appId) {
 
         if (ids == null) {
-            return Result.valueOfError("请选择需要删除的资源");
+            return Result.valueOfErrorMsg("请选择需要删除的资源");
         }
 
         sysRoleService.deleteBatch(ids,appId);

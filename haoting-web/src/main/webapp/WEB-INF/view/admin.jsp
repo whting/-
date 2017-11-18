@@ -90,7 +90,7 @@
 				<div class="navbar-buttons navbar-header pull-right" role="navigation">
 					<ul class="nav ace-nav">
 						<!--  -->
-						<li class="grey">
+					<%--	<li class="grey">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								<i class="ace-icon fa fa-tasks"></i>
 							</a>
@@ -106,7 +106,7 @@
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
 							</a>
-						</li>
+						</li>--%>
 						
 
 						<!-- #section:basics/navbar.user_menu -->
@@ -122,7 +122,7 @@
 							</a>
 
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li>
+<%--								<li>
 									<a href="#">
 										<i class="ace-icon fa fa-cog"></i>
 										设置
@@ -136,7 +136,7 @@
 									</a>
 								</li>
 
-								<li class="divider"></li>
+								<li class="divider"></li>--%>
 
 								<li>
 									<a id="_btnExit" href="#">
@@ -447,7 +447,7 @@
 				});
 				
 				var defaultPage = null;
-				
+
 				function tree(list) {
 					var html = "";
 					var data = null;

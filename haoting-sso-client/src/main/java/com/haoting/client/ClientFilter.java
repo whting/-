@@ -72,7 +72,7 @@ public abstract class ClientFilter implements Filter {
 				httpResponse.setContentType("application/json;charset=UTF-8");
 				httpResponse.setStatus(HttpStatus.OK.value());
 				PrintWriter writer = httpResponse.getWriter();
-				writer.write(JSON.toJSONString(Result.valueOfError(e.getMessage())));
+				writer.write(JSON.toJSONString(Result.valueOfErrorMsg(e.getMessage())));
 				writer.flush();
 				writer.close();
 			}

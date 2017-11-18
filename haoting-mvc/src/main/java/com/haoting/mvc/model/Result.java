@@ -53,7 +53,7 @@ public class Result<T> {
         return new Result(RS_FALSE_DEFAULT.state, code, message);
     }
 
-    public static Result valueOfError(String message) {
+    public static Result valueOfErrorMsg(String message) {
         return new Result(RS_FALSE_DEFAULT.state, RS_FALSE_DEFAULT.code, message);
     }
 

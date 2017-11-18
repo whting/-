@@ -56,10 +56,10 @@ public class SysAppController extends BaseController {
 
     @RequestMapping(value = "/validateCode", method = RequestMethod.POST)
     @ResponseBody
-    public Result<String> validateCode(@ValidateParam(value = { NOT_BLANK }, name = "应用编码") String code) {
+    public Result<String> validateCode(Long id,@ValidateParam(value = { NOT_BLANK }, name = "应用编码") String code) {
         SysApp db = sysAppService.findByCode(code);
-        if (null != db) {
-            return Result.valueOfError("应用编码已存在");
+        if (null != db && !db.getId().equals(id)) {
+            return Result.valueOfErrorMsg("应用编码已存在");
         }
         return Result.valueOfSuccess();
     }
@@ -91,7 +91,7 @@ public class SysAppController extends BaseController {
     public Result<String> delete(@ValidateParam(value = { NOT_BLANK }, name = "ids") Long[] ids) {
 
         if (ids == null) {
-            return Result.valueOfError("请选择需要删除的行");
+            return Result.valueOfErrorMsg("请选择需要删除的行");
         }
 
         sysAppService.deleteBatch(ids);

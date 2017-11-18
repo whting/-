@@ -32,7 +32,6 @@
 	* @see Gritter#add();
 	*/
 	$.gritter.add = function(params){
-
 		try {
 			return Gritter.add(params || {});
 		} catch(e) {
@@ -41,7 +40,6 @@
 			(typeof(console) != 'undefined' && console.error) ? 
 				console.error(err, params) : 
 				alert(err);
-				
 		}
 		
 	}

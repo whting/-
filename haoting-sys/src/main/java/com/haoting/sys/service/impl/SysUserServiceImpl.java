@@ -37,6 +37,7 @@ public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysUserRoleService sysUserRoleService;
 
+    @Autowired
     private SysUserAppService sysUserAppService;
 
     @Override
@@ -135,18 +136,18 @@ public class SysUserServiceImpl implements SysUserService {
 
         SysUser sysUser = sysUserMapper.findByAccount(account);
         if (sysUser == null) {
-            return Result.valueOfError("登录名不存在");
+            return Result.valueOfErrorMsg("登录名不存在");
         }
         if (!sysUser.getPassword().equals(password)) {
-            return Result.valueOfError("密码不正确");
+            return Result.valueOfErrorMsg("密码不正确");
         }
         if (TrueFalseEnum.FALSE.getValue().equals(sysUser.getIsEnable())) {
-            return Result.valueOfError("已被管理员禁用");
+            return Result.valueOfErrorMsg("已被管理员禁用");
         }
 
         List<SysApp> list = sysAppService.findByUserId(TrueFalseEnum.TRUE.getValue(), sysUser.getId());
         if (CollectionUtils.isEmpty(list)) {
-            return Result.valueOfError("不存在可操作应用");
+            return Result.valueOfErrorMsg("不存在可操作应用");
         }
 
         boolean isAppExist = false;
@@ -157,7 +158,7 @@ public class SysUserServiceImpl implements SysUserService {
             }
         }
         if (!isAppExist) {
-            return Result.valueOfError("没有应用操作权限");
+            return Result.valueOfErrorMsg("没有应用操作权限");
         }
 
         sysUser.setLastLoginIp(ipAddr);

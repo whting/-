@@ -115,7 +115,7 @@
 								$.aceRedirect("${_path}/admin/user");
 							}
 							else {
-								$.gritter.add({text: d.message});
+								$.gritter.add({title: 'Error!',text: d.message});
 							}
 						}
 			        },'json');

@@ -52,7 +52,7 @@ public class AuthenticationRpcServiceImpl implements AuthenticationRpcService {
 
         SysApp app = sysAppService.findByCode(appCode);
         if (app == null) {
-            return Result.valueOfError("没有对应的应用");
+            return Result.valueOfErrorMsg("没有对应的应用");
         }
 
         if (StringUtils.isBlank(token)) {
@@ -74,7 +74,7 @@ public class AuthenticationRpcServiceImpl implements AuthenticationRpcService {
 
         SysApp app = sysAppService.findByCode(ssoAppCode);
         if (app == null) {
-            return Result.valueOfError("没有对应的应用");
+            return Result.valueOfErrorMsg("没有对应的应用");
         }
 
         SessionPermission applicationPermission = permissionManager.getPermission(null, app.getId());
@@ -91,7 +91,7 @@ public class AuthenticationRpcServiceImpl implements AuthenticationRpcService {
         boolean isAppPerm = applicationPermission.getPermissionSet().contains(path);
 
         if (isAppPerm) {
-            return Result.valueOfError("没有权限,请联系管理员,开通操作权限");
+            return Result.valueOfErrorMsg("没有权限,请联系管理员,开通操作权限");
         }
 
         return Result.valueOfSuccess();

@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.List;
@@ -90,12 +89,12 @@ public class SysUserController {
     public Result<String> delete(@ValidateParam(value = { NOT_BLANK }, name = "ids")Long[] ids) {
 
         if (ids == null) {
-            return Result.valueOfError("请选择需要删除的资源");
+            return Result.valueOfErrorMsg("请选择需要删除的资源");
         }
 
         sysUserService.deleteBatch(ids);
 
-        return Result.valueOfSuccess("删除成功");
+        return Result.valueOfSuccessMsg("删除成功");
     }
 
     /**
@@ -120,9 +119,9 @@ public class SysUserController {
 
         sysUserService.updateEnable(isEnable, ids);
         if(isEnable){
-            return Result.valueOfSuccess("启用成功");
+            return Result.valueOfErrorMsg("启用成功");
         }
-        return Result.valueOfSuccess("禁用成功");
+        return Result.valueOfSuccessMsg("禁用成功");
     }
 
     @RequestMapping("/resetPassword")
@@ -132,7 +131,7 @@ public class SysUserController {
 
         sysUserService.resetPassword(ids);
 
-        return Result.valueOfSuccess("重置密码成功");
+        return Result.valueOfSuccessMsg("重置密码成功");
     }
 
 }
